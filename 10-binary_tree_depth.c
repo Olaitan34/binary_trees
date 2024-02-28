@@ -1,4 +1,4 @@
-#include "binary_tree.h"
+#include "binary_trees.h"
 
 /**
  * binary_tree_height - measures the depth of a binary tree
@@ -13,11 +13,13 @@ size_t binary_tree_depth(const binary_tree_t *tree)
 	if (!tree)
 		return (0);
 
-	size_t ld = 0;
-	size_t rd = 0;
+	size_t depth = 0;
 
-	ld = tree->left ? 1 + binary_tree_depth(tree->left) : 0;
-	rd = tree->right ? 1 + binary_tree_depth(tree->right) : 0;
+	while (tree->parent)
+	{
+		depth++;
+		tree = tree->parent;
+	}
 
-	return (ld > rd ? ld : rd);
+	return (depth);
 }
